@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Patrimonio Detail</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+      id="bootstrap-css"
+    />
+    <!-- Icons -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
+    <style>
+      body {
+        background-image: url("../../tmp/fundo.avif");
+        background-size: cover;
+        margin: 0;
+        padding: 0;
+      }
+
+      .overlay {
+        position: relative;
+        z-index: 1;
+      }
+
+      .container {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        color: #ffffff;
+      }
+
+      .form-group input[type="text"],
+      .form-group select {
+        border-width: 2px;
+        color: #337ab7;
+        background-color: rgb(223, 223, 223);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container, flexar" style="text-align: center">
+      <div class="item">
+        <h1 style="color: #337ab7">Patrimonio Detail</h1>
+        <form action="/patrimonios/edit/<%=patrimonio._id%>" method="post">
+          <!-- Como o id não pode ser alterado usamos o input hidden para o enviar como campo do formulário. -->
+          <input
+            type="hidden"
+            name="_id"
+            id="_id"
+            value="<%= patrimonio._id %>"
+          />
+          <br />
+
+          <p style="color: #337ab7">ID : <%= patrimonio._id %></p>
+
+          <label style="color: #337ab7" for="nome">Nome</label>
+          <input
+            type="text"
+            name="nome"
+            id="nome"
+            value="<%= patrimonio.nome %>"
+            required
+          />
+          <br />
+          <br />
+
+          <label style="color: #337ab7" for="avaliacao">Avaliação</label>
+          <select id="avaliacao" name="avaliacao" required>
+          <%
+          var options = ["1 estrela", "2 estrelas", "3 estrelas", "4 estrelas", "5 estrelas" ];
+          for ( var i = 0; i < options.length; i++ )
+          {
+              var isSelected = ( patrimonio.avaliacao == options[i] ) ? "selected" : "";
+          %>  
+              <option value="<%=options[i]%>" <%=isSelected %>>
+                  <%= options[i] %>
+              </option>
+          <%
+          }
+          %>
+          </select>
+          <br />
+          <br />
+          
+
+          <label style="color: #337ab7" for="tipo">Tipo de património</label>
+          <select id="tipo" name="tipo" required>
+            <%
+            var options = ["Museu", "Parque de exposição", "Teatro", "Edifício religioso", "Estádio", "Outro" ];
+            for ( var i = 0; i < options.length; i++ )
+            {
+                var isSelected = ( patrimonio.tipo == options[i] ) ? "selected" : "";
+            %>  
+                <option value="<%=options[i]%>" <%=isSelected %>>
+                    <%= options[i] %>
+                </option>
+            <%
+            }
+            %>
+          </select>
+          <br />
+          <br />
+
+          <label style="color: #337ab7" for="localizacao">Localização</label>
+          <input
+            id="localizacao"
+            name="localizacao"
+            required
+          />
+          <select id="placesDropdown" required>
+            <option></option>
+          </select>
+          <br />
+          <br />
+
+          <script>
+            const streetInput = document.getElementById("localizacao");
+            const placesDropdown = document.getElementById("placesDropdown");
+            let selectedOption = null; // Variável para armazenar a opção selecionada
+
+            streetInput.addEventListener("input", function () {
+              const searchText = streetInput.value;
+
+              fetch(
+                `https://api.geoapify.com/v1/geocode/autocomplete?text=${searchText}&apiKey=14b712fffd8e4369ac75978308f63ecf`
+              )
+                .then((response) => response.json())
+                .then((data) => {
+                  placesDropdown.innerHTML = "";
+
+                  data.features.forEach((feature) => {
+                    const option = document.createElement("option");
+                    option.text = feature.properties.formatted;
+                    option.value = JSON.stringify(feature.properties); // Armazena as propriedades como valor da opção
+                    placesDropdown.add(option);
+                  });
+                  placesDropdown.selectedIndex = -1; // Remover a opção selecionada atualmente
+                })
+                .catch((error) => {
+                  console.error("Erro ao obter os lugares:", error);
+                });
+            });
+            placesDropdown.addEventListener("change", function () {
+              selectedOption = JSON.parse(placesDropdown.value); // Converte o valor JSON em um objeto
+              var foundAddress = selectedOption;
+              document.getElementById("localizacaoNome").value =
+                foundAddress.name;
+              document.getElementById("localizacaoCodigoPostal").value =
+                foundAddress.postcode;
+              document.getElementById("localizacaoCidade").value =
+                foundAddress.city;
+            });
+          </script>
+
+          <label for="localizacaoNome" hidden="true"></label>
+          <input
+            id="localizacaoNome"
+            name="localizacaoNome"
+            type="text"
+            value="<%= patrimonio.localizacaoNome %>"
+            readonly
+          />
+          <label for="localizacaoCodigoPostal" hidden="true"></label>
+          <input
+            id="localizacaoCodigoPostal"
+            name="localizacaoCodigoPostal"
+            type="text"
+            value="<%= patrimonio.localizacaoCodigoPostal %>"
+            readonly
+          />
+          <label for="localizacaoCidade" hidden="true"></label>
+          <input
+            id="localizacaoCidade"
+            name="localizacaoCidade"
+            type="text"
+            value="<%= patrimonio.localizacaoCidade %>"
+            readonly
+          />
+          <br />
+          <br />
+
+          <label style="color: #337ab7" for="description">Descriçao</label>
+          <input
+            type="text"
+            name="description"
+            id="description"
+            value="<%= patrimonio.description %>"
+          />
+          <br />
+          <br />
+
+          <br />
+          <input type="submit" value="Editar" />
+        </form>
+        <h3>
+          <a href="/patrimonios">Ver todos os Patrimonios</a>
+        </h3>
+      </div>
+    </div>
+  </body>
+</html>

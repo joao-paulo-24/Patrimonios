@@ -1,0 +1,62 @@
+<div class="card">
+  <br />
+  <h1 class="text-center">Comprar um ticket</h1>
+  <div class="item-form">
+    <label for="form-nif">NIF</label>
+    <input
+      id="form-nif"
+      placeholder="NIF do cliente"
+      [(ngModel)]="ticket.clientNIF"
+      type="number"
+    />
+
+    <label for="form-name">Nome do evento</label>
+
+    <select [(ngModel)]="ticket.eventoNome">
+      <option *ngFor="let eventos of evento" [value]="eventos.nome">
+        {{ eventos.nome }}
+      </option>
+    </select>
+
+    <label for="form-name">Quantidade de bilhetes</label>
+    <input
+      id="form-name"
+      placeholder="Quantidade"
+      [(ngModel)]="ticket.quantidade"
+      type="number"
+      required
+    />
+
+    <input
+      id="form-name"
+      placeholder="Pontos"
+      [(ngModel)]="ticket.pontos"
+      hidden="true"
+      type="number"
+    />
+    <button
+      class="ticket-button"
+      (click)="descontoAplicado()"
+      [disabled]="botaoDesabilitado || semPontos"
+    >
+      Usar pontos
+    </button>
+
+    <p *ngIf="pontosDescontados" class="mensagem-desconto">
+      Assim que terminar a compra do(s) seu(s) bilhetes ser-lhe-ão descontados
+      1000 pontos da sua conta de utilizador. À entrada no estabelecimento
+      destino poderá reivindicar o seu bilhete gratuito.
+    </p>
+
+    <p *ngIf="semPontos" class="mensagem-desconto">
+      Não tem pontos suficientes para resgatar o bilhete grátis
+    </p>
+    <button class="ticket-button" (click)="descontoPontos();add()">
+      Comprar
+    </button>
+    <button class="ticket-button" (click)="navigateToTickets()">
+      Lista de tickets
+    </button>
+  </div>
+</div>
+<br />

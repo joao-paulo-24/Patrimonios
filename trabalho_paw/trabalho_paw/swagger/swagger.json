@@ -1,0 +1,491 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "PAW TP API",
+    "description": "REST API para o trabalho prático de PAW",
+    "contact": {
+      "email": "8210455@estg.ipp.pt 8210458@estg.ipp.pt 8210461@estg.ipp.pt"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/api/v1",
+  "tags": [
+    {
+      "name": "Patrimónios",
+      "description": "Representation of our patrimónios"
+    },
+    {
+      "name": "Eventos",
+      "description": "Representation of our events"
+    },
+    {
+      "name": "Tickets",
+      "description": "Representation of our tickets"
+    },
+    {
+      "name": "User",
+      "description": "Operations about user"
+    }
+  ],
+  "schemes": ["http"],
+  "paths": {
+    "/patrimonios": {
+      "get": {
+        "tags": ["Patrimonios"],
+        "summary": "Gets all patrimonios",
+        "description": "Gets all patrimonios in database",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Patrimonios list",
+            "schema": {
+              "$ref": "#/definitions/Patrimonios"
+            }
+          }
+        },
+        "security": [
+          {
+            "item_jwt_auth": []
+          }
+        ]
+      }
+    },
+    "/patrimonios/show/{patrimonioId}": {
+      "get": {
+        "tags": ["Patrimonios"],
+        "summary": "Find património by ID",
+        "description": "Returns a single patrimonio by ID",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "patrimonioId",
+            "in": "path",
+            "description": "ID of patrimonio to return",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Patrimonio selected",
+            "schema": {
+              "$ref": "#/definitions/Patrimonios"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Patrimonio not found"
+          }
+        },
+        "security": [
+          {
+            "item_jwt_auth": []
+          }
+        ]
+      }
+    },
+    "/events": {
+      "get": {
+        "tags": ["Events"],
+        "summary": "Gets all events",
+        "description": "Gets all events in database",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Events list",
+            "schema": {
+              "$ref": "#/definitions/Events"
+            }
+          }
+        },
+        "security": [
+          {
+            "item_jwt_auth": []
+          }
+        ]
+      }
+    },
+    "/events/show/{eventId}": {
+      "get": {
+        "tags": ["Events"],
+        "summary": "Find event by ID",
+        "description": "Returns a single event by ID",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "eventId",
+            "in": "path",
+            "description": "ID of event to return",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Event selected",
+            "schema": {
+              "$ref": "#/definitions/Events"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Event not found"
+          }
+        },
+        "security": [
+          {
+            "item_jwt_auth": []
+          }
+        ]
+      }
+    },
+    "/tickets": {
+      "get": {
+        "tags": ["Tickets"],
+        "summary": "Gets all tickets",
+        "description": "Gets all tickets in database",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Ticket list",
+            "schema": {
+              "$ref": "#/definitions/Tickets"
+            }
+          }
+        },
+        "security": [
+          {
+            "item_jwt_auth": []
+          }
+        ]
+      }
+    },
+    "/tickets/show/{ticketId}": {
+      "get": {
+        "tags": ["Tickets"],
+        "summary": "Find ticket by ID",
+        "description": "Returns a single ticket by ID",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "ticketId",
+            "in": "path",
+            "description": "ID of ticket to return",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ticket selected",
+            "schema": {
+              "$ref": "#/definitions/Tickets"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Ticket not found"
+          }
+        },
+        "security": [
+          {
+            "item_jwt_auth": []
+          }
+        ]
+      }
+    },
+    "/tickets/purchase": {
+      "post": {
+        "tags": ["Tickets"],
+        "summary": "Add a new ticket",
+        "description": "Adds a new ticket to the database",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Ticket that needs to be added to the database",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Tickets"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ticket purchased",
+            "schema": {
+              "$ref": "#/definitions/Tickets"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "security": [
+          {
+            "item_jwt_auth": []
+          }
+        ]
+      }
+    },
+    "/tickets/delete/{ticketId}": {
+      "delete": {
+        "tags": ["Tickets"],
+        "summary": "Deletes a ticket",
+        "description": "Deletes a ticket from the database",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "ticketId",
+            "in": "path",
+            "description": "Ticket id to delete",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ticket deleted",
+            "schema": {
+              "$ref": "#/definitions/Tickets"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Ticket not found"
+          }
+        },
+        "security": [
+          {
+            "item_jwt_auth": []
+          }
+        ]
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "tags": ["user"],
+        "summary": "Create user",
+        "description": "This can be used to register a user in databsase.",
+        "operationId": "createUser",
+        "produces": ["application/xml", "application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": ["user"],
+        "summary": "Logs user into the system",
+        "description": "Log in the website so can use all functionalities",
+        "operationId": "loginUser",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "400": {
+            "description": "Invalid username/password supplied"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "item_jwt_auth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "x-access-token"
+    }
+  },
+  "definitions": {
+    "Patrimonios": {
+      "type": "object",
+      "required": [
+        "_id",
+        "nome",
+        "avaliacao",
+        "description",
+        "localizacao",
+        "localizacaoCidade",
+        "localizacaoCodigoPostal",
+        "localizacaoNome",
+        "file"
+      ],
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "nome": {
+          "type": "string",
+          "example": "patrimonio0"
+        },
+        "avaliacao": {
+          "type": "string",
+          "example": "5 estrelas"
+        },
+        "description": {
+          "type": "string"
+        },
+        "localizacao": {
+          "type": "string",
+          "example": "teofilo braga"
+        },
+        "localizacaoNome": {
+          "type": "string",
+          "example": "Rua Teófilo Braga"
+        },
+        "localizacaoCodigoPostal": {
+          "type": "string",
+          "example": "3030-076"
+        },
+        "localizacaoCidade": {
+          "type": "string",
+          "example": "Coimbra"
+        },
+        "file": {
+          "type": "string"
+        }
+      }
+    },
+    "Events": {
+      "type": "object",
+      "required": [
+        "_id",
+        "nome",
+        "description",
+        "precoBilhetes",
+        "patrimonioNome",
+        "preco"
+      ],
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "nome": {
+          "type": "string",
+          "example": "event0"
+        },
+        "description": {
+          "type": "string"
+        },
+        "precoBilhetes": {
+          "type": "float",
+          "example": "0.99"
+        },
+        "patrimonioNome": {
+          "type": "string"
+        },
+        "preco": {
+          "type": "string",
+          "example": "Pago"
+        }
+      }
+    },
+    "Tickets": {
+      "type": "object",
+      "required": ["_id", "eventoNome", "clientNIF", "pontos", "quantidade"],
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "eventoNome": {
+          "type": "string"
+        },
+        "clientNIF": {
+          "type": "integer",
+          "example": "123456789"
+        },
+        "pontos": {
+          "type": "integer",
+          "format": "int",
+          "example": "100"
+        },
+        "quantidade": {
+          "type": "integer",
+          "format": "int",
+          "example": "3"
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "required": [
+        "nome",
+        "email",
+        "userName",
+        "password",
+        "tipoUser",
+        "pontos"
+      ],
+      "properties": {
+        "nome": {
+          "type": "string",
+          "example": "Pedro"
+        },
+        "email": {
+          "type": "string",
+          "example": "Pedro@estg.ipp.pt"
+        },
+        "userName": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string",
+          "example": "pedro12345"
+        },
+        "tipoUser": {
+          "type": "string",
+          "example": "Cliente"
+        },
+        "pontos": {
+          "type": "integer",
+          "format": "int",
+          "example": "100"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,40 @@
+<div id="patrimonioTable" *ngIf="patrimonio">
+  <br>
+
+  <h1 class="text-center">Lista de Patrimonios</h1>
+
+  <div>
+    <input type = "text" placeholder="Search patrimonio" [(ngModel)]="filterText"/>
+  </div>
+
+  <table class="list-table">
+    <thead>
+      <tr>
+        <th>Nome do património</th>
+        <th>Avaliação</th>
+        <th>View</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let patrimonios of patrimonio | filterPatrimonio : filterText">
+        <td>
+          {{ patrimonios.nome }}
+        </td>
+
+        <td>
+          {{ patrimonios.avaliacao }}
+        </td>
+        <td>
+          <button
+            class="view-button"
+            title="view patrimonio"
+            (click)="view(patrimonios._id)"
+          >
+            View
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br>

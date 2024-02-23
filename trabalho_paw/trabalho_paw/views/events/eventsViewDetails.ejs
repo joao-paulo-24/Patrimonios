@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Evento Detail</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"
+    id="bootstrap-css">
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <style>
+      body {
+        background-image: url("../../tmp/fundo.avif");
+        background-size: cover;
+        margin: 0;
+        padding: 0;
+      }
+
+      .overlay {
+        position: relative;
+        z-index: 1;
+      }
+
+      .container {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        color: #ffffff;
+      }
+
+      .form-group input[type="text"],
+      .form-group select {
+        border-width: 2px;
+        color: #337ab7;
+        background-color: rgb(223, 223, 223);
+      }
+    </style>
+  </head>
+
+<body>
+  <div class="container, flexar">
+    <div class="item">
+      <h1 style="color: #337ab7;text-align: center;">Event Detail</h1>
+      <table>
+        <tbody>
+          <tr>
+            <td  style="color: #337ab7">Id</td>
+            <td style="color: #337ab7">:</td>
+            <td>
+              <%= event._id %>
+            </td>
+          </tr>
+          <tr>
+            <td style="color: #337ab7">Nome</td>
+            <td style="color: #337ab7">:</td>
+            <td>
+              <%= event.nome %>
+            </td>
+          </tr>
+          <tr>
+            <td style="color: #337ab7">Detalhe</td>
+            <td style="color: #337ab7">:</td>
+            <td>
+              <%= event.preco %>
+            </td>
+          </tr>
+          <% if(event.precoBilhetes !=0) { %>
+            <tr>
+              <td style="color: #337ab7">Preco</td>
+              <td style="color: #337ab7">:</td>
+              <td>
+                <%= event.precoBilhetes %>
+              </td>
+            </tr>
+            <% } %>
+              <tr>
+                <td style="color: #337ab7">ID do Património</td>
+                <td style="color: #337ab7">:</td>
+                <td>
+                  <%= event.patrimonio.nome %>
+                </td>
+              </tr>
+              <tr>
+                <td style="color: #337ab7">Descriçao</td>
+                <td style="color: #337ab7">:</td>
+                <td>
+                  <%= event.description %>
+                </td>
+              </tr>
+
+        </tbody>
+      </table>
+      <h3 style="text-align: center;color: #337ab7"><a href="/events">Ver todos os eventos</a></h3>
+    </div>
+  </div>
+</body>
+
+</html>

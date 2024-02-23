@@ -1,0 +1,19 @@
+<div class="card" *ngIf="ticket">
+    
+    <br>    
+    <h1 class="text-center">Detalhes dos tickets</h1>
+    <br>
+    <div class="ticket-form">
+        <label for="form-name">Nome do Evento</label>
+        <input disabled id="form-name" placeholder="event name" [(ngModel)]="ticket.eventoNome" type="text">
+        <label for="form-nif">NIF do cliente</label>
+        <input disabled id="form-nif" placeholder="client nif" [(ngModel)]="ticket.clientNIF" type="number">
+        <label for="form-num">Número de bilhetes</label>
+        <input disabled id="form-num" placeholder="tickets number" [(ngModel)]="ticket.quantidade" type="number">
+
+        <button class="ticket-button" (click)="navigateToTickets()"> Listar os Tickets </button>
+    </div>
+
+</div>
+
+<br>

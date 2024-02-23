@@ -1,0 +1,55 @@
+<div class="card" *ngIf="evento">
+  <br />
+  <h1 class="text-center">Evento details</h1>
+  <br />
+  <div class="evento-form">
+    <label for="form-id">ID</label>
+    <input
+      disabled
+      id="form-id"
+      placeholder="Evento id"
+      [(ngModel)]="evento._id"
+      type="text"
+    />
+    <label for="form-name">Name</label>
+    <input
+      disabled
+      id="form-name"
+      placeholder="Evento name"
+      [(ngModel)]="evento.nome"
+      type="text"
+    />
+    <label for="form-price">Price</label>
+    <input
+      disabled
+      id="form-price"
+      placeholder="Evento preço"
+      [(ngModel)]="evento.precoBilhetes"
+      type="number"
+    />
+
+    <label for="form-patrimonio">ID do património</label>
+    <input
+      disabled
+      id="form-patrimonio"
+      placeholder="Evento patrimonio"
+      [(ngModel)]="evento.patrimonio"
+      type="text"
+    />
+    
+    <label for="form-description">Descrição</label>
+    <input
+      disabled
+      id="form-description"
+      placeholder="Evento description"
+      [(ngModel)]="evento.description"
+      type="text"
+    />
+
+    <button class="evento-button" (click)="navigateToEvento()">
+      List Eventos
+    </button>
+  </div>
+</div>
+
+<br />

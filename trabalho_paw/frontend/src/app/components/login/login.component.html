@@ -1,0 +1,28 @@
+<div class="login card">
+  <br />
+  <h1 class="text-center">Login</h1>
+  <br />
+  <div class="login-form">
+    <label for="userName">User</label>
+    <input
+      id="userName"
+      placeholder="Username"
+      [(ngModel)]="userName"
+      type="text"
+    />
+    <label for="password">Password</label>
+    <input
+      id="password"
+      placeholder="Password"
+      [(ngModel)]="password"
+      type="password"
+    />
+
+    <button class="login-button" (click)="login()">Login</button>
+    <p>
+      Ainda não é membro?
+      <a routerLink="/register">Registar</a>
+    </p>
+  </div>
+</div>
+<br />

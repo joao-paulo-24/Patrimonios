@@ -1,0 +1,45 @@
+<div class="register card">
+  <br />
+  <h1 class="text-center">Criar conta</h1>
+  <br />
+  <div class="register-form">
+    <label for="nome">Nome</label>
+    <input id="nome" placeholder="nome" [(ngModel)]="nome" type="text" />
+    <br />
+    <br />
+
+    <label for="nome">Email</label>
+    <input id="email" placeholder="email" [(ngModel)]="email" type="email" />
+    <br />
+    <br />
+
+    <label for="userName">Nome de utilizador</label>
+    <input
+      id="userName"
+      placeholder="nome de utilizador"
+      [(ngModel)]="userName"
+      type="text"
+    />
+    <br />
+    <br />
+
+    <label for="password">Password</label>
+    <input
+      id="password"
+      placeholder="Password"
+      [(ngModel)]="password"
+      type="password"
+    />
+    <br />
+    <br />
+
+    <button class="register-button" (click)="register()">Register</button>
+    <br />
+    <br />
+    <p>
+      Já tem uma conta?
+      <a routerLink="/login">Entrar</a>
+    </p>
+  </div>
+</div>
+<br />

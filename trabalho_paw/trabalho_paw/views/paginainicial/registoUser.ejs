@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Criar Utilizador</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+      id="bootstrap-css"
+    />
+    <!-- Icons -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
+    <style>
+      body {
+        background-image: url("../../tmp/fundo.avif");
+        background-size: cover;
+        margin: 0;
+        padding: 0;
+      }
+
+      .overlay {
+        position: relative;
+        z-index: 1;
+      }
+
+      .container {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        color: #ffffff;
+      }
+
+      .form-group input[type="text"],
+      .form-group select {
+        border-width: 2px;
+        color: #337ab7;
+        background-color: rgb(223, 223, 223);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container" style="text-align: center">
+      <h1 style="color: #337ab7">Criar Novo Utilizador</h1>
+      <form id="registo" action="/login/createUser" method="post">
+        <label style="color: #337ab7" for="nome">Nome</label>
+        <input type="text" name="nome" required />
+        <br />
+
+        <label style="color: #337ab7" for="email">Email</label>
+        <input type="email" name="email" required />
+        <br />
+
+        <label style="color: #337ab7" for="userName">Username</label>
+        <input type="text" name="userName" required />
+        <br />
+
+        <label style="color: #337ab7" for="password">Password</label>
+        <input type="password" name="password" required minlength="5" />
+        <br />
+
+        <label style="color: #337ab7" for="tipoUser">Utilizador</label>
+        <select name="tipoUser">
+          <option value="Empregado">Empregado</option>
+          <option value="Administrador">Administrador</option>
+        </select>
+        <br />
+
+        <label style="color: #337ab7" for="pontos"></label>
+        <input type="text" name="pontos" value="0" hidden />
+      </form>
+      <form id="inicio" action="/"></form>
+      <input form="registo" type="submit" value="Criar" />
+      <input form="inicio" type="submit" value="Voltar" />
+    </div>
+  </body>
+</html>

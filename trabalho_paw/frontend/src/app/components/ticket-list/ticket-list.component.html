@@ -1,0 +1,57 @@
+<div id="ticketTable" *ngIf="ticket">
+
+  <br>
+  <h1 class="text-center">Lista de tickets</h1>
+  <h1>O cliente tem {{ getPontos() }} pontos</h1>
+  <br>
+
+  <div>
+    <input type = "text" placeholder="Search ticket" [(ngModel)]="filterText"/>
+  </div>
+  <br>
+
+  <table class="list-table">
+    <thead>
+      <tr>
+        <th>Nome do evento</th>
+        <th>NIF do cliente</th>
+        <th>View</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let tickets of ticket | filterTickets : filterText">
+        <td>
+          {{ tickets.eventoNome }}
+        </td>
+
+        <td>
+          {{ tickets.clientNIF }}
+        </td>
+        <td>
+          <button
+            class="view-button"
+            title="view ticket"
+            (click)="view(tickets._id)"
+          >
+            View
+          </button>
+        </td>
+        <td>
+          <button
+            class="delete-button"
+            title="delete ticket"
+            (click)="delete(tickets._id)"
+          >
+            delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <button class="item-button text-center" (click)="addTickets()">
+    Comprar bilhetes
+  </button>
+</div>
+<br>

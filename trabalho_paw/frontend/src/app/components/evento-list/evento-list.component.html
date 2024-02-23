@@ -1,0 +1,41 @@
+<div id="eventTable" *ngIf="evento">
+  <br>
+
+    <h1 class="text-center">Lista de Eventos</h1>
+    <br>
+  
+    <div>
+      <input type = "text" placeholder="Search event" [(ngModel)]="filterText"/>
+    </div>
+    <br>
+
+    <table class="list-table">
+      <thead>
+        <tr>
+          <th>Nome do evento</th>
+          <th>Preço</th>
+          <th>View</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let eventos of evento | filterEvents : filterText">
+          <td>
+            {{ eventos.nome }}
+          </td>
+  
+          <td>
+            {{ eventos.precoBilhetes }}
+          </td>
+          <td>
+            <button
+              class="view-button"
+              title="view event"
+              (click)="view(eventos._id)">
+              View
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <br>

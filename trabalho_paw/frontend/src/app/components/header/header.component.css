@@ -1,0 +1,21 @@
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+    border-bottom: 1px solid #777
+}
+
+.links {
+    display: flex;
+    justify-content: center;
+}
+
+.links li {
+    margin-right: 1em;
+    list-style: none;
+}
+
+#patrimonios #events #tickets #logout a {
+    color: #dec129;
+}
+

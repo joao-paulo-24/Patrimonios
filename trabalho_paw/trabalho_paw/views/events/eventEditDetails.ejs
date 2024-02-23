@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Event Detail</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"
+    id="bootstrap-css">
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <style>
+      body {
+        background-image: url("../../tmp/fundo.avif");
+        background-size: cover;
+        margin: 0;
+        padding: 0;
+      }
+
+      .overlay {
+        position: relative;
+        z-index: 1;
+      }
+
+      .container {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        color: #ffffff;
+      }
+
+      .form-group input[type="text"],
+      .form-group select {
+        border-width: 2px;
+        color: #337ab7;
+        background-color: rgb(223, 223, 223);
+      }
+    </style>
+  </head>
+
+<body>
+  <div class="container, flexar" style="text-align: center">
+    <div class="item">
+      <h1 style="color: #337ab7">Event Detail</h1>
+      <form action="/events/edit/<%=event._id%>" method="post">
+        <!-- Como o id não pode ser alterado usamos o input hidden para o enviar como campo do formulário. -->
+        <input type="hidden" name="_id" id="_id" value="<%= event._id %>" />
+        <br />
+
+        <p style="color: #337ab7">ID : <%= event._id %>
+        </p>
+
+        <label style="color: #337ab7" for="nome">Nome</label>
+        <input type="text" name="nome" id="nome" value="<%= event.nome %>" />
+        <br />
+
+        <script>
+          function changePrice() {
+            var price = document.getElementById("preco");
+            if (price.value == "gratuito") {
+              document.getElementById("precoBilhetes").style.visibility =
+                "hidden";
+            } else if (price.value == "pago") {
+              document.getElementById("precoBilhetes").style.visibility =
+                "visible";
+            }
+          }
+        </script>
+
+        <label style="color: #337ab7" for="preco">Preço dos bilhetes</label>
+        <select id="preco" name="preco" onchange="changePrice()">
+          <option value="pago">Pago</option>
+          <option value="gratuito">Gratuito</option>
+        </select>
+        <br />
+
+        <label style="color: #337ab7" for="precoBilhetes">Valor</label>
+        <input id="precoBilhetes" type="number" step="0.01" min="0.01" name="precoBilhetes" value="<%= event.precoBilhetes %>"/>
+        <br />
+        <br />
+
+        <label style="color: #337ab7" for="description">Descriçao</label>
+        <input type="text" name="description" id="description" value="<%= event.description %>" required/>
+        <br />
+        <br />
+        <label style="color: #337ab7" for="patrimonio">Patrimónios</label>
+        <% if(patrimonio.length>0) { %>
+          <tbody>
+            <select id="patrimonio" name="patrimonio" required>
+              <% var options = patrimonio;
+              for(var i=0; i< options.length;i++) {
+                var isSelected = (patrimonio[i].nome == options[i].nome) ? "selected": "";
+                 %>
+                <option value="<%= options[i].nome%> " <%=isSelected %>>
+                  <%= options[i].nome%>
+                </option>
+                <% } %>
+          </tbody>
+          <% } else { %>
+            <div>No patrimonios found.</div>
+            <% } %>
+              <br />
+              <br />
+              <input type="submit" value="Editar" />
+      </form>
+      <h3>
+        <a href="/events">Ver todos os eventos</a>
+      </h3>
+    </div>
+  </div>
+</body>
+
+</html>
